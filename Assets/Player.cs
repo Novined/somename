@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour
     public enum ProjectAxis { onlyX = 0, xAndY = 1 };
     public ProjectAxis projectAxis = ProjectAxis.onlyX;
     public float speed = 150;
-    public float addForce = 15;
+    public float addForce = 30;
     public bool lookAtCursor;
     public KeyCode leftButton = KeyCode.A;
     public KeyCode rightButton = KeyCode.D;
@@ -30,11 +31,13 @@ public class Player : MonoBehaviour
     private bool spacePressed;
     private Animator animator;
     private bool animPlaying;
+    private BoxCollider2D collider;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        collider = GetComponent<BoxCollider2D>();
         body.fixedAngle = true;
         canJump = spacePressed = animPlaying = false;
         jumpCnt--;
@@ -48,22 +51,43 @@ public class Player : MonoBehaviour
         }
     }
 
+    void CheckBlockCollidable(Collision2D coll)
+    {
+        coll.collider.isTrigger = coll.collider.bounds.max.y > collider.bounds.min.y + 10;
+    }
+
     void OnCollisionStay2D(Collision2D coll)
     {
         if (coll.transform.tag == "Ground")
         {
-            body.drag = 10;
+            CheckBlockCollidable(coll);
+            
             curJump = 0;
             canJump = true;
+
+            GroundBlock comp = coll.gameObject.GetComponent<GroundBlock>();
+            bool flag = comp == null ? true : comp.allowDownShift;
+            
+            if(flag)
+            {
+                if (Input.GetKey(downButton))
+                    coll.collider.isTrigger = true;
+            }
+            
          }
     }
 
     void OnCollisionExit2D(Collision2D coll)
     {
         if (coll.transform.tag == "Ground")
-        {
-            body.drag = 0;
-        }
+            coll.collider.isTrigger = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (collider.bounds.center.y > col.bounds.max.y)
+            col.isTrigger = false;
+
     }
 
     void FixedUpdate()
@@ -119,6 +143,8 @@ public class Player : MonoBehaviour
         if (spacePressed)
             spacePressed = !Input.GetKeyUp(spaceButton);
 
+       
+        
         if (lookAtCursor)
         {
             Vector3 lookPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
