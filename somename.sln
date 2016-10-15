@@ -5,6 +5,8 @@ Project("{1DD18595-48E7-0AD9-A714-C61D2426AB06}") = "somename", "Assembly-CSharp
 EndProject
 Project("{1DD18595-48E7-0AD9-A714-C61D2426AB06}") = "somename", "Assembly-CSharp-Editor.csproj", "{7D546864-2EF1-619C-81A5-C65EEFAE8C51}"
 EndProject
+Project("{1DD18595-48E7-0AD9-A714-C61D2426AB06}") = "somename", "Assembly-UnityScript.unityproj", "{420CAEC5-2FB3-AAFD-B1E2-6457A92D2B9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{7D546864-2EF1-619C-81A5-C65EEFAE8C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D546864-2EF1-619C-81A5-C65EEFAE8C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D546864-2EF1-619C-81A5-C65EEFAE8C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{420CAEC5-2FB3-AAFD-B1E2-6457A92D2B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{420CAEC5-2FB3-AAFD-B1E2-6457A92D2B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{420CAEC5-2FB3-AAFD-B1E2-6457A92D2B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{420CAEC5-2FB3-AAFD-B1E2-6457A92D2B9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

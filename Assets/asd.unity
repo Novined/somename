@@ -102,9 +102,9 @@ GameObject:
   - 61: {fileID: 125529067}
   - 50: {fileID: 125529068}
   - 114: {fileID: 125529069}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ostalnye_0 (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 125529064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.23, y: 0.59, z: 0}
+  m_LocalPosition: {x: -1.88, y: 3.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -182,7 +182,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -197,11 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd82017f582afd647a09ffd8bd1a241d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target1: {fileID: 782867028}
   target: {fileID: 782867030}
-  speed: 3
+  speed: 6
   attack1Range: 1
   attack1Damage: 1
   timeBetweenAttacks: 0
+  Repulsion: 3
 --- !u!1 &241455300
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +214,7 @@ GameObject:
   - 4: {fileID: 241455301}
   - 198: {fileID: 241455303}
   - 199: {fileID: 241455302}
-  m_Layer: 4
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -226,7 +228,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241455300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23, y: -0.18, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -326,7 +328,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 1
-  randomSeed: 1448810395
+  randomSeed: -1924431864
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2043,9 +2045,9 @@ GameObject:
   - 114: {fileID: 782867032}
   - 61: {fileID: 782867031}
   - 95: {fileID: 782867034}
-  m_Layer: 4
+  m_Layer: 9
   m_Name: ostalnye_0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2090,7 +2092,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 782867028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: -1.9, y: -1.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2286,7 +2288,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1211908728}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

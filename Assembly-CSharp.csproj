@@ -49,6 +49,7 @@
      <Compile Include="Assets\DarkenScreen.cs" />
      <Compile Include="Assets\Enemy.cs" />
      <Compile Include="Assets\EnemyTerritory.cs" />
+     <Compile Include="Assets\GroundBlock.cs" />
      <Compile Include="Assets\PC2D\Example\CameraFollow.cs" />
      <Compile Include="Assets\PC2D\Example\DifferentSpeeds\DifferentSpeeds.cs" />
      <Compile Include="Assets\PC2D\Example\LadderBody.cs" />
@@ -68,7 +69,9 @@
      <Compile Include="Assets\PC2D\Scripts\PlatformerAnimation2D.cs" />
      <Compile Include="Assets\PC2D\Scripts\PlatformerMotor2D.cs" />
      <Compile Include="Assets\PC2D\Scripts\PlayerController2D.cs" />
+     <Compile Include="Assets\PC2D\Scripts\Sanya\ClimateControl.cs" />
      <Compile Include="Assets\PC2D\Scripts\Sanya\Copy1.cs" />
+     <Compile Include="Assets\PC2D\Scripts\Sanya\Magic2.cs" />
      <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\newcam.cs" />
  <Reference Include="UnityEngine.UI">

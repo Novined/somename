@@ -80,6 +80,8 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{55ED89D4-4DA6-45C5-F630-09F6889C05AF}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript.unityproj">
+      <Project>{420CAEC5-2FB3-AAFD-B1E2-6457A92D2B9F}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
