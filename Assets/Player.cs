@@ -9,25 +9,37 @@ public class Player : MonoBehaviour
     public enum ProjectAxis { onlyX = 0, xAndY = 1 };
     public ProjectAxis projectAxis = ProjectAxis.onlyX;
     public float speed = 150;
-    public float addForce = 7;
+    public float addForce = 15;
     public bool lookAtCursor;
     public KeyCode leftButton = KeyCode.A;
     public KeyCode rightButton = KeyCode.D;
     public KeyCode upButton = KeyCode.W;
     public KeyCode downButton = KeyCode.S;
-    public KeyCode addForceButton = KeyCode.Space;
+    public KeyCode spaceButton = KeyCode.Space;
     public bool isFacingRight = true;
+    public bool canJumpTwice = true;
+    public int jumpCnt = 2;
+
+    private int curJump;
     private Vector3 direction;
     private float vertical;
     private float horizontal;
     private Rigidbody2D body;
     private float rotationY;
-    private bool jump;
+    private bool canJump;
+    private bool spacePressed;
+    private Animator animator;
+    private bool animPlaying;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         body.fixedAngle = true;
+        canJump = spacePressed = animPlaying = false;
+        jumpCnt--;
+        curJump = 0;
+        
 
         if (projectAxis == ProjectAxis.xAndY)
         {
@@ -41,8 +53,9 @@ public class Player : MonoBehaviour
         if (coll.transform.tag == "Ground")
         {
             body.drag = 10;
-            jump = true;
-        }
+            curJump = 0;
+            canJump = true;
+         }
     }
 
     void OnCollisionExit2D(Collision2D coll)
@@ -50,12 +63,12 @@ public class Player : MonoBehaviour
         if (coll.transform.tag == "Ground")
         {
             body.drag = 0;
-            jump = false;
         }
     }
 
     void FixedUpdate()
     {
+
         body.AddForce(direction * body.mass * speed);
 
         if (Mathf.Abs(body.velocity.x) > speed / 100f)
@@ -72,9 +85,20 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(addForceButton) && jump)
+            if(!spacePressed)
             {
-                body.velocity = new Vector2(0, addForce);
+                if (Input.GetKey(spaceButton))
+                {
+                    spacePressed = true;
+
+                    if (canJump)
+                    {
+                        curJump++;
+                        if (curJump == jumpCnt)
+                            canJump = false;
+                        body.velocity = new Vector2(0, addForce);
+                    }
+                }
             }
         }
     }
@@ -92,6 +116,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (spacePressed)
+            spacePressed = !Input.GetKeyUp(spaceButton);
+
         if (lookAtCursor)
         {
             Vector3 lookPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
@@ -100,22 +127,23 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        if (Input.GetKey(upButton)) vertical = 1;
-        else if (Input.GetKey(downButton)) vertical = -1; else vertical = 0;
+        vertical = 0;
 
-        if (Input.GetKey(leftButton)) horizontal = -1;
-        else if (Input.GetKey(rightButton)) horizontal = 1; else horizontal = 0;
-
-        if (projectAxis == ProjectAxis.onlyX)
-        {
-            direction = new Vector2(horizontal, 0);
-        }
+        if (Input.GetKey(leftButton))
+            horizontal = -1;
+        else if (Input.GetKey(rightButton))
+            horizontal = 1;
         else
-        {
-            if (Input.GetKeyDown(addForceButton)) speed += addForce; else if (Input.GetKeyUp(addForceButton)) speed -= addForce;
-            direction = new Vector2(horizontal, vertical);
-        }
+            horizontal = 0;
 
-        if (horizontal > 0 && !isFacingRight) Flip(); else if (horizontal < 0 && isFacingRight) Flip();
+        direction = new Vector2(horizontal, vertical);
+
+        if(horizontal == 0)
+           animator.StartPlayback();
+        else
+           animator.StopPlayback();
+        
+        if ((horizontal > 0 && !isFacingRight) || (horizontal < 0 && isFacingRight))
+            Flip();
     }
 }
